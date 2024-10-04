@@ -3,9 +3,24 @@
 
 #include <iostream>
 
+#include "TestClasses/container.h"
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    // call default ctor of Container
+    Container container;
+
+    // call copy ctor of Container
+    Container copy_container = container;
+
+    // call move ctor of Container
+    Container move_container{ std::move(container) };
+
+    // call operator=(const Container& other)
+    copy_container = move_container;
+
+    // call operator=(Container&& other)
+    copy_container = std::move(move_container);
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

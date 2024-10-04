@@ -6,6 +6,7 @@
 #include <string>
 #include <ctime>
 #include <thread>
+#include <iomanip>
 
 enum class LogLevel
 {
@@ -62,10 +63,20 @@ public:
     }
 
     static std::string getCurrentTime() {
-        std::time_t now = std::time(nullptr);
-        char buf[20];
-        std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
-        return std::string(buf);
+        std::time_t currentTime = std::time(nullptr);  // 获取当前时间
+        struct tm localTime;
+
+        // 使用 localtime_s 将 time_t 转换为本地时间的 tm 结构
+        if (localtime_s(&localTime, &currentTime) == 0) {
+            // 创建字符串流
+            std::ostringstream oss;
+            // 将格式化时间写入字符串流
+            oss << std::put_time(&localTime, "%Y-%m-%d %H:%M:%S");
+            return oss.str();  // 返回格式化后的字符串
+        }
+        else {
+            return "Error converting time";  // 返回错误信息
+        }
     }
 
 private:
