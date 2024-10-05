@@ -22,9 +22,9 @@ public:
 	{
 		if (&other == this)
 		{
-			// d	o resource management
+			// do resource management
 		}
-		LOG_INFO(__func__);
+		LOG_INFO("operator=(const Container& other)");
 		return *this;
 	}
 
@@ -34,7 +34,7 @@ public:
 		{
 			// do resource management
 		}
-		LOG_INFO(__func__);
+		LOG_INFO("operator=(Container&& other)");
 		return *this;
 	}
 
